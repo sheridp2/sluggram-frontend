@@ -1,4 +1,5 @@
 import superagent from 'superagent'
+import * as util from '../lib/util.js'
 
 // sync actions for updating store
 export const tokenSet = (token) => ({
@@ -6,7 +7,10 @@ export const tokenSet = (token) => ({
   payload: token,
 })
 
-export const tokenDelete = () => ({ type: 'LOGOUT' })
+export const logout = () => {
+  util.deleteCookie('X-Sluggram-Token')
+  return { type: 'LOGOUT' }
+}
 
 // async actions
 export const signupRequest =  (user) => (dispatch) => {
